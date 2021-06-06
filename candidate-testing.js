@@ -30,6 +30,7 @@ function askQuestion() {
 
 for (let i = 0; i < questions.length; i++) {
   candidateAnswers.push(input.question(questions[i]));
+  console.log(`Your answer: ${candidateAnswers[i]}\nCorrect Answer: ${correctAnswers[i]}\n`);
 }
 
 }
@@ -37,16 +38,25 @@ for (let i = 0; i < questions.length; i++) {
 function gradeQuiz(candidateAnswers) {
 
   // TODO 1.2c: Let the candidate know if they have answered the question correctly or incorrectly // 
-
+  let overallScore = 0;
   for (let i = 0; i < correctAnswers.length; i++) {
-    if (candidateAnswers[i] === correctAnswers[i]) {
-      console.log(`Your answer: ${candidateAnswers[i]}\nCorrect Answer: ${correctAnswers[i]}\n`);
+    if (candidateAnswers[i].toLowerCase() === correctAnswers[i].toLowerCase()) {
+      overallScore++;
+      
     }
   }
 
 
-  let grade;
+  let grade = (overallScore / questions.length) * 100;
+  let passOrFail = "";
   
+  if (grade >= 80) {
+    passOrFail = "PASS";
+  } else {
+    passOrFail = "FAIL";
+  }
+
+  console.log(`>>> Overall Score: ${grade}% (${overallScore} of ${questions.length} questions correct) <<<\n>>> Test Result: ${passOrFail} <<<`);
 
   return grade;
 }
